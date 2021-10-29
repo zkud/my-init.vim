@@ -34,12 +34,25 @@ Plug 'L3MON4D3/LuaSnip'
 Plug 'tomasiser/vim-code-dark'
 
 "" Git
-Plug 'chrisbra/changesPlugin'
+Plug 'airblade/vim-gitgutter'
 
 call plug#end()
 
 """ Current color scheme
 colorscheme codedark
+
+""" Git
+let g:gitgutter_sign_added = 'a'
+let g:gitgutter_sign_modified = 'm'
+let g:gitgutter_sign_removed = 'r'
+let g:gitgutter_sign_removed_first_line = 'rf'
+let g:gitgutter_sign_modified_removed = 'mr'
+highlight GitGutterAdd    guifg=#00FF00 ctermfg=3
+highlight GitGutterChange guifg=#FFFF00 ctermfg=2
+highlight GitGutterDelete guifg=#ff0000 ctermfg=1
+au BufEnter * :GitGutterEnable
+au BufEnter * :GitGutterSignsEnable
+set updatetime=50
 
 """ Code completion setup
 lua << EOF
