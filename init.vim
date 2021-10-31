@@ -53,13 +53,10 @@ set noexpandtab  " Make sure that every file uses real tabs, not spaces
 set shiftround   " Round indent to multiple of 'shiftwidth'
 set smartindent  " Do smart indenting on starting of each line
 set autoindent   " Copy indent from previos lines
-
 filetype plugin indent off
-
-let s:tabwidth = 2
-exec 'set tabstop=' .s:tabwidth
-exec 'set shiftwidth=' .s:tabwidth
-exec 'set softtabstop=' .s:tabwidth
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
 
 """ Code completion setup
 lua << EOF
@@ -121,7 +118,7 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
   buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
   buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-  buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vm.lsp.buf.list_workspace_folders()))<CR>', opts)
+  buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
   buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
   buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
