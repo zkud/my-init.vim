@@ -79,7 +79,7 @@ cmp.setup {
     ['<A-j>'] = cmp.mapping.select_next_item(),
     ['<A-d>'] = cmp.mapping.scroll_docs(-4),
     ['<A-f>'] = cmp.mapping.scroll_docs(4),
-    ['<A-Space>'] = cmp.mapping.complete(),
+    ['<A-h>'] = cmp.mapping.complete(),
     ['<A-e>'] = cmp.mapping.close(),
     ['<Tab>'] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Replace,
