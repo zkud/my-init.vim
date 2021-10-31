@@ -3,22 +3,16 @@ set encoding=utf-8          " default encoding is utf-8
 set nocompatible            " disable compatibility to old-time vi
 set hlsearch                " highlight search 
 set incsearch               " incremental search
-set tabstop=2               " number of columns occupied by a tab 
-set softtabstop=2           " see multiple spaces as tabstops so <BS> does the right thing
-set expandtab               " converts tabs to white space
-set shiftwidth=2            " width for autoindents
-set autoindent              " indent a new line the same amount as the line just typed
 set number                  " add line numbers
 set wildmode=longest,list   " get bash-like tab completions
 set cc=80                   " set an 80 column border for good coding style
-filetype plugin indent on   " allow auto-indenting depending on file type
 syntax on                   " syntax highlighting
 set clipboard=unnamedplus   " using system clipboard
-filetype plugin on
 set ttyfast                 " Speed up scrolling in Vim
 set noswapfile              " disable creating swap file
 set fileformat=unix         " Unix file format (for example line endings)
 set mouse=a                 " Enable scrolling (in term too)
+filetype plugin on
 
 """ Plugins
 call plug#begin('~/.vim/plugged')
@@ -53,6 +47,16 @@ highlight GitGutterDelete guifg=#ff0000 ctermfg=1
 au BufEnter * :GitGutterEnable
 au BufEnter * :GitGutterSignsEnable
 set updatetime=50
+
+""" Tabs&expand
+set noexpandtab  " Make sure that every file uses real tabs, not spaces
+set shiftround   " Round indent to multiple of 'shiftwidth'
+set smartindent  " Do smart indenting on starting of each line
+set autoindent   " Copy indent from previos lines
+filetype plugin indent off
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
 
 """ Code completion setup
 lua << EOF
