@@ -30,6 +30,11 @@ Plug 'tomasiser/vim-code-dark'
 "" Git
 Plug 'airblade/vim-gitgutter'
 
+"" FS
+Plug 'preservim/nerdtree' |
+            \ Plug 'Xuyuanp/nerdtree-git-plugin' |
+            \ Plug 'ryanoasis/vim-devicons'
+
 call plug#end()
 
 """ Current color scheme
