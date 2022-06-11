@@ -82,8 +82,8 @@ cmp.setup {
   mapping = {
     ['<A-k>'] = cmp.mapping.select_prev_item(),
     ['<A-j>'] = cmp.mapping.select_next_item(),
-    ['<A-d>'] = cmp.mapping.scroll_docs(-4),
-    ['<A-f>'] = cmp.mapping.scroll_docs(4),
+    ['<A-s>'] = cmp.mapping.scroll_docs(-4),
+    ['<A-d>'] = cmp.mapping.scroll_docs(4),
     ['<A-h>'] = cmp.mapping.complete(),
     ['<A-e>'] = cmp.mapping.close(),
     ['<Tab>'] = cmp.mapping.confirm {
@@ -192,3 +192,8 @@ tnoremap <A-t> <C-\><C-n>:call TermToggle(12)<CR>
 tnoremap <A-m> <C-\><C-n>:call ChangeTermMode()<CR>
 nnoremap <A-m> :call ChangeTermMode()<CR>
 
+""" Files Tree
+" Files Tree Open Close Function
+nnoremap <A-f> :NERDTreeToggle<CR>
+inoremap <A-f> <Esc>:NERDTreeToggle<CR>
+tnoremap <A-t> <C-\><C-n>:NERDTreeToggle<CR>
