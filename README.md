@@ -3,10 +3,10 @@
 ## Presequencies
 
 It's assumed you have:
-- nvim with version => 0.5
-- rust_analyzer for rust language lsp support
-- tsserver for js/ts lsp support
-- vim-plug for plugins management
+- ```nvim``` with version => 0.5
+- ```rust_analyzer``` for rust language lsp support
+- ```tsserver``` for js/ts lsp support
+- ```vim-plug``` for plugins management
 
 ## Setup
 
