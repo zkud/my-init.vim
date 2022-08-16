@@ -1,4 +1,4 @@
-# My neowim setup config
+# My neovim setup config
 
 ## Presequencies
 
