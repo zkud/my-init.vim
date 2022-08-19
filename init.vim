@@ -1,4 +1,4 @@
-""" Common flags
+"----------------------------------------------------------------- Common flags
 set encoding=utf-8          " default encoding is utf-8
 set nocompatible            " disable compatibility to old-time vi
 set hlsearch                " highlight search 
@@ -14,7 +14,7 @@ set fileformat=unix         " Unix file format (for example line endings)
 set mouse=a                 " Enable scrolling (in term too)
 filetype plugin on
 
-""" Plugins
+"---------------------------------------------------------------------- Plugins
 call plug#begin('~/.vim/plugged')
 
 "" LSP
@@ -23,6 +23,9 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'L3MON4D3/LuaSnip'
+Plug 'onsails/lspkind.nvim'
+Plug 'tzachar/cmp-tabnine', { 'do': './install.sh' }
+" For windows , { 'do': 'powershell ./install.ps1' } 
 
 "" Color schemes
 Plug 'tomasiser/vim-code-dark'
@@ -37,10 +40,10 @@ Plug 'preservim/nerdtree' |
 
 call plug#end()
 
-""" Current color scheme
+"--------------------------------------------------------- Current color scheme
 colorscheme codedark
 
-""" Git
+"-------------------------------------------------------------------------- Git
 let g:gitgutter_sign_added = 'a'
 let g:gitgutter_sign_modified = 'm'
 let g:gitgutter_sign_removed = 'r'
@@ -53,7 +56,7 @@ au BufEnter * :GitGutterEnable
 au BufEnter * :GitGutterSignsEnable
 set updatetime=50
 
-""" Tabs&expand
+"------------------------------------------------------------------ Tabs&expand
 set noexpandtab  " Make sure that every file uses real tabs, not spaces
 set shiftround   " Round indent to multiple of 'shiftwidth'
 set smartindent  " Do smart indenting on starting of each line
@@ -63,22 +66,36 @@ set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 
-""" Code completion setup
+"-------------------------------------------------------- Code completion setup
+
 lua << EOF
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
+
+-- tabnine setup
+local tabnine = require 'cmp_tabnine.config'
+
+tabnine.setup({
+	max_lines = 1000,
+	max_num_results = 20,
+	sort = true,
+	run_on_every_keystroke = true,
+	show_prediction_strength = true
+})
 
 -- luasnip setup
 local luasnip = require 'luasnip'
 
 -- nvim-cmp setup
 local cmp = require 'cmp'
+local lspkind = require 'lspkind'
 cmp.setup {
   snippet = {
     expand = function(args)
       require('luasnip').lsp_expand(args.body)
     end,
   },
+		
   mapping = {
     ['<A-k>'] = cmp.mapping.select_prev_item(),
     ['<A-j>'] = cmp.mapping.select_next_item(),
@@ -91,11 +108,23 @@ cmp.setup {
       select = true,
     },
   },
+	formatting = {
+		format = lspkind.cmp_format({
+			mode = "symbol_text",
+			menu = ({
+				nvim_lsp = "[LSP]",
+				luasnip = "[LuaSnip]",
+				cmp_tabnine = "[TabNine]",
+			})
+		}),
+	},
   sources = {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
+		{ name = 'cmp_tabnine' },
   },
 }
+
 EOF
 
 """ LSP config
@@ -138,7 +167,10 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'rust_analyzer', 'tsserver' }
+local servers = {
+	-- 'rust_analyzer' For rust support
+	-- 'tsserver' For js/ts support
+}
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
@@ -149,7 +181,7 @@ for _, lsp in ipairs(servers) do
 end
 EOF
 
-""" Terminal
+"--------------------------------------------------------------------- Terminal
 " Terminal Open Close Function
 let g:term_buf = 0
 let g:term_win = 0
@@ -192,7 +224,7 @@ tnoremap <A-t> <C-\><C-n>:call TermToggle(12)<CR>
 tnoremap <A-m> <C-\><C-n>:call ChangeTermMode()<CR>
 nnoremap <A-m> :call ChangeTermMode()<CR>
 
-""" Files Tree
+"------------------------------------------------------------------- Files Tree
 " Files Tree Open Close Function
 nnoremap <A-f> :NERDTreeToggle<CR>
 inoremap <A-f> <Esc>:NERDTreeToggle<CR>
