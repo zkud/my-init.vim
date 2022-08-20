@@ -29,6 +29,7 @@ Plug 'tzachar/cmp-tabnine', { 'do': './install.sh' }
 
 "" Color schemes
 Plug 'tomasiser/vim-code-dark'
+Plug 'sonph/onehalf', { 'rtp': 'vim' }
 
 "" Git
 Plug 'airblade/vim-gitgutter'
@@ -38,10 +39,15 @@ Plug 'preservim/nerdtree' |
             \ Plug 'Xuyuanp/nerdtree-git-plugin' |
             \ Plug 'ryanoasis/vim-devicons'
 
+"" Extra features
+Plug 'tpope/vim-commentary' " block selection + gc to comment/uncomment
+
 call plug#end()
 
 "--------------------------------------------------------- Current color scheme
-colorscheme codedark
+colorscheme codedark " In case you want dark theme
+" colorscheme onehalflight " In case you want ligth theme
+" let g:airline_theme='onehalfdark'
 
 "-------------------------------------------------------------------------- Git
 let g:gitgutter_sign_added = 'a'
@@ -77,7 +83,7 @@ local tabnine = require 'cmp_tabnine.config'
 
 tabnine.setup({
 	max_lines = 1000,
-	max_num_results = 20,
+	max_num_results = 100,
 	sort = true,
 	run_on_every_keystroke = true,
 	show_prediction_strength = true
